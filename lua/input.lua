@@ -16,7 +16,7 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
 -- utilities
-vim.keymap.set("n", "<leader>tt", "<cmd>ToggleTerm<CR>", { desc = "Toggle terminal" })
+vim.keymap.set("n", "<leader>t", "<cmd>ToggleTerm<CR>", { desc = "Toggle terminal" })
 vim.keymap.set("n", "<leader>ot", "<cmd>terminal<CR>", { desc = "Open terminal in new buffer" })
 vim.keymap.set("n", "<leader>on", "<cmd>tabnew<CR>", { desc = "Open new tab" })
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open file explorer" })
