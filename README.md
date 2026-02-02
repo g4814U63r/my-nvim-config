@@ -1,1 +1,1 @@
-# my-git-config
+# my-nvim-config
