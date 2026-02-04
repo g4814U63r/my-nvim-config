@@ -5,9 +5,8 @@ require("input")
 require("options")
 require("autocmds")
 require("lazy/lazyInit")
-require("lazy").setup({ { import = "lazy/plugins" } }, { import = "lazy/options" })
+require("lazy").setup({ { import = "lazy/plugins" } }, require("lazy/options"))
 
-require("plugins.lualine.evil_lualine")
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
 --[[

@@ -58,10 +58,10 @@ vim.o.scrolloff = 10
 -- instead raise a dialog asking if you wish to save the current file(s)
 -- See `:help 'confirm'`
 vim.o.confirm = true
-vim.g.neovide_opacity = 0.8
-vim.g.neovide_window_blurred = true
+-- vim.g.neovide_opacity = 0.8
+-- vim.g.neovide_window_blurred = true
 vim.opt.directory = vim.fn.stdpath("data") .. "/swap//"
-
+vim.opt.signcolumn = "yes:2" -- or "auto:2"
 if vim.g.neovide then
 	vim.o.guifont = "Hurmit Nerd Font:h15"
 end

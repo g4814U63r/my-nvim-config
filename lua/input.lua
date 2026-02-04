@@ -19,42 +19,27 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagn
 vim.keymap.set("n", "<leader>t", "<cmd>ToggleTerm<CR>", { desc = "Toggle terminal" })
 vim.keymap.set("n", "<leader>ot", "<cmd>terminal<CR>", { desc = "Open terminal in new buffer" })
 vim.keymap.set("n", "<leader>on", "<cmd>tabnew<CR>", { desc = "Open new tab" })
-vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open file explorer" })
+vim.keymap.set("n", "<leader>fc", "<cmd>FzfLua colorschemes<CR>", { desc = "Colors" })
+vim.keymap.set("n", "<leader>fz", "<cmd>FzfLua<CR>", { desc = "Open FzfLua menu" })
+vim.keymap.set("n", "<leader><F2>", "<cmd>set background=light<CR>", { desc = "switch to light version of theme" })
+vim.keymap.set("n", "<leader><F3>", "<cmd>set background=dark<CR>", { desc = "switch to dark version of theme" })
+
 -- buffer control
 vim.keymap.set("n", "<leader>bd", "<cmd>BufferDelete<CR>", { desc = "Delete current buffer" })
 vim.keymap.set("n", "<leader>bc", "<cmd>BufferClose<CR>", { desc = "Close current buffer" })
 vim.keymap.set("n", "<leader>b1", "<cmd>BufferFirst<CR>", { desc = "Go to first buffer" })
-vim.keymap.set("n", "<leader>l", "<cmd>BufferNext<CR>")
-vim.keymap.set("n", "<leader>h", "<cmd>BufferPrevious<CR>")
-vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeFindFileToggle<CR>", { desc = "Open NvimTree at file location" })
+vim.keymap.set("n", "<leader>bl", "<cmd>FzfLua buffers<CR>", { desc = "Show buffer list" })
+vim.keymap.set("n", "<leader>l", "<cmd>BufferNext<CR>", { desc = "Next buffer" })
+vim.keymap.set("n", "<leader>h", "<cmd>BufferPrevious<CR>", { desc = "Previous buffer" })
+vim.keymap.set("n", "<leader>bad", "<cmd>%bwipeout!<CR>", { desc = "Delete all buffers" })
 
--- FzfLua
-vim.keymap.set("n", "<leader>fc", "<cmd>FzfLua colorschemes<CR>", { desc = "Colors" })
+-- navigation
+vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeFindFileToggle<CR>", { desc = "Open NvimTree at file location" })
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open file explorer" })
 vim.keymap.set("n", "<leader>ff", "<cmd>FzfLua files<CR>", { desc = "Fzf files" })
-vim.keymap.set("n", "<leader>fl", "<cmd>FzfLua buffers<CR>", { desc = "Show buffer list" })
-vim.keymap.set("n", "<leader>fz", "<cmd>FzfLua<CR>", { desc = "Open FzfLua menu" })
 vim.keymap.set("n", "<leader>fg", "<cmd>FzfLua grep<CR>", { desc = "Open FzfLua grep" })
 
--- -- Session Management
--- local session_dir = vim.fn.expand("~/VimSessions/")
--- if vim.fn.isdirectory(session_dir) == 0 then
--- 	vim.fn.mkdir(session_dir, "p")
--- end
---
--- for i = 0, 9 do
--- 	--
--- 	-- Save session
--- 	vim.keymap.set("n", "<leader>," .. i, function()
--- 		vim.cmd("mksession! " .. session_dir .. "Session" .. i .. ".vim")
--- 		print("Session " .. i .. " saved")
--- 	end, { desc = "Save and overwrite session " .. i })
---
--- 	-- Load session
--- 	vim.keymap.set("n", "<leader>." .. i, function()
--- 		vim.cmd("source " .. session_dir .. "Session" .. i .. ".vim")
--- 		print("Session " .. i .. " loaded")
--- 	end, { desc = "Load session " .. i })
--- end
+-- barbar buffers
 for i = 1, 9 do
 	vim.keymap.set("n", "<leader>" .. i, function()
 		require("barbar.api").goto_buffer(i)
@@ -120,6 +105,10 @@ vim.api.nvim_set_keymap("n", "<C-->", "<C-w>-", { noremap = true, silent = true 
 vim.api.nvim_set_keymap("n", "<C-+>", "<C-w>+", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C->>", "<C-w>>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-<>", "<C-w><", { noremap = true, silent = true })
+vim.keymap.set("n", "<Up>", "<C-w>k")
+vim.keymap.set("n", "<Down>", "<C-w>j")
+vim.keymap.set("n", "<Left>", "<C-w>h")
+vim.keymap.set("n", "<Right>", "<C-w>l")
 
 if vim.g.neovide == true then
 	vim.api.nvim_set_keymap("n", "<F11>", ":let g:neovide_fullscreen = !g:neovide_fullscreen<CR>", {})

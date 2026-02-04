@@ -1,25 +1,11 @@
--- [[ Configure and install plugins ]]
---
---  To check the current status of your plugins, run
---    :Lazy
---
---  You can press `?` in this menu for help. Use `:q` to close the window
---
---  To update plugins you can run
---    :Lazy update
---
-
 return {
-	-- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-	"NMAC427/guess-indent.nvim", -- Detect tabstop and shiftwidth automatically
+	"troyfletcher/vim-colors-synthwave",
 	"MunifTanjim/nui.nvim",
 	"oskarnurm/koda.nvim",
 	"edeneast/nightfox.nvim",
 	"bluz71/vim-moonfly-colors",
 	"scottmckendry/cyberdream.nvim",
-	"luisiacc/the-matrix.nvim",
 	"water-sucks/darkrose.nvim",
-	"mrkn/mrkn256.vim",
 	"noahfrederick/vim-hemisu",
 	"bluz71/vim-moonfly-colors",
 	"owickstrom/vim-colors-paramount",
@@ -27,7 +13,8 @@ return {
 	"Old-Farmer/noctis-nvim",
 	"rktjmp/lush.nvim",
 	"vim-scripts/darkzen-color-scheme",
-
+	"rockerBOO/boo-colorscheme-nvim",
+	"NMAC427/guess-indent.nvim", -- Detect tabstop and shiftwidth automatically
 	{
 		"kevinhwang91/nvim-ufo",
 		dependencies = {
@@ -66,7 +53,7 @@ return {
 
 	{
 		"eoh-bse/minintro.nvim",
-		opts = { color = "#0078D7" },
+		opts = { color = "#63B0B0" },
 		config = true,
 		lazy = false,
 	},
@@ -184,7 +171,7 @@ return {
 			-- Window-local options to use for oil buffers
 			win_options = {
 				wrap = false,
-				signcolumn = "no",
+				signcolumn = "yes:2",
 				cursorcolumn = false,
 				foldcolumn = "0",
 				spell = false,
@@ -1187,8 +1174,9 @@ return {
 	},
 
 	{
-		"rachaeldawn/sweet-dark.vim",
-		priority = 1000, -- Make sure to load this before all the other start plugins.
+
+		"ray-x/aurora",
+		priority = 1000,
 		config = function()
 			---@diagnostic disable-next-line: missing-fields
 			-- Load the colorscheme here.
@@ -1197,12 +1185,8 @@ return {
 			-- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 			vim.o.background = "dark"
 
-			vim.cmd.colorscheme("carbonfox")
+			vim.cmd.colorscheme("aurora")
 		end,
-	},
-
-	{
-		"troyfletcher/vim-colors-synthwave",
 	},
 
 	-- Highlight todo, notes, etc in comments
@@ -1269,11 +1253,11 @@ return {
 			--  Check out: https://github.com/echasnovski/mini.nvim
 		end,
 	},
-	{ -- Highlight, edit, and navigate code
+	{
 		"nvim-treesitter/nvim-treesitter",
+		branch = "master", -- backward compatible API
+		lazy = false, -- per upstream: no lazy-loading
 		build = ":TSUpdate",
-		main = "nvim-treesitter.configs", -- Sets main module to use for opts
-		-- [[ Configure Treesitter ]] See `:help nvim-treesitter`
 		opts = {
 			ensure_installed = {
 				"bash",
@@ -1288,28 +1272,14 @@ return {
 				"vim",
 				"vimdoc",
 			},
-			-- Autoinstall languages that are not installed
 			auto_install = true,
-			highlight = {
-				enable = true,
-				-- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-				--  If you are experiencing weird indenting issues, add the language to
-				--  the list of additional_vim_regex_highlighting and disabled languages for indent.
-				additional_vim_regex_highlighting = { "ruby" },
-			},
+			highlight = { enable = true, additional_vim_regex_highlighting = { "ruby" } },
 			indent = { enable = true, disable = { "ruby" } },
 		},
-		-- There are additional nvim-treesitter modules that you can use to interact
-		-- with nvim-treesitter. You should go explore a few and see what interests you:
-		--
-		--    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
-		--    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
-		--    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+		config = function(_, opts)
+			require("nvim-treesitter.configs").setup(opts)
+		end,
 	},
-
-	-- COLORSCHEMES
-
-	{ "miikanissi/modus-themes.nvim", priority = 1000 },
 
 	-- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
 	-- init.lua. If you want these files, they are in the repository, so you can just download them and
