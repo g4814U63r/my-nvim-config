@@ -105,10 +105,10 @@ vim.api.nvim_set_keymap("n", "<C-->", "<C-w>-", { noremap = true, silent = true 
 vim.api.nvim_set_keymap("n", "<C-+>", "<C-w>+", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C->>", "<C-w>>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-<>", "<C-w><", { noremap = true, silent = true })
-vim.keymap.set("n", "<Up>", "<C-w>k")
-vim.keymap.set("n", "<Down>", "<C-w>j")
-vim.keymap.set("n", "<Left>", "<C-w>h")
-vim.keymap.set("n", "<Right>", "<C-w>l")
+vim.keymap.set("n", "<C-Up>", "<C-w>k")
+vim.keymap.set("n", "<C-Down>", "<C-w>j")
+vim.keymap.set("n", "<C-Left>", "<C-w>h")
+vim.keymap.set("n", "<C-Right>", "<C-w>l")
 
 if vim.g.neovide == true then
 	vim.api.nvim_set_keymap("n", "<F11>", ":let g:neovide_fullscreen = !g:neovide_fullscreen<CR>", {})

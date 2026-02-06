@@ -65,3 +65,5 @@ vim.opt.signcolumn = "yes:2" -- or "auto:2"
 if vim.g.neovide then
 	vim.o.guifont = "Hurmit Nerd Font:h15"
 end
+
+vim.env.PATH = vim.env.PATH .. ":/home/gab/.yarn/bin"
