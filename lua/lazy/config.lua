@@ -1,5 +1,5 @@
 return {
-	-- Configuration options for lazy.nvim itself (e.g., performance settings)
+	-- Configuration for lazy.nvim itself (e.g., performance settings)
 	checker_enabled = false, -- recommended by kickstart
 	change_detection = {
 		enabled = true,

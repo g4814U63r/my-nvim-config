@@ -1,69 +1,80 @@
--- [[ Setting options ]]
--- See `:help vim.o`
-vim.o.number = true
-vim.o.relativenumber = true
--- Don't show the mode, since it's already in the status line
-vim.o.showmode = false
--- Sync clipboard between OS and Neovim.
---  Schedule the setting after `UiEnter` because it can increase startup-time.
---  Remove this option if you want your OS clipboard to remain independent.
---  See `:help 'clipboard'`
-vim.schedule(function()
-	vim.o.clipboard = "unnamedplus"
-end)
--- Enable break indent
-vim.o.breakindent = true
+-- =========================================================
+-- Globals
+-- =========================================================
 
--- Save undo history
-vim.o.undofile = true
+-- Disable netrw (using Oil, Nvim-tree or vifm)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
--- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
-vim.o.ignorecase = true
-vim.o.smartcase = true
+-- =========================================================
+-- UI & Visuals
+-- =========================================================
 
--- Keep signcolumn on by default
-vim.o.signcolumn = "yes"
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.cursorline = true
+vim.opt.showmode = false
+vim.g.have_nerd_font = true
 
--- Decrease update time
-vim.o.updatetime = 250
+-- Keep signcolumn visible (avoid text shifting)
+vim.opt.signcolumn = "yes:2"
 
--- Decrease mapped sequence wait time
-vim.o.timeoutlen = 300
+-- Whitespace visualization
+vim.opt.list = true
+vim.opt.listchars = {
+	tab = "» ",
+	trail = "·",
+	nbsp = "␣",
+}
 
--- Configure how new splits should be opened
-vim.o.splitright = true
-vim.o.splitbelow = true
+-- Live preview of substitutions
+vim.opt.inccommand = "split"
 
--- Sets how neovim will display certain whitespace characters in the editor.
---  See `:help 'list'`
---  and `:help 'listchars'`
---
---  Notice listchars is set using `vim.opt` instead of `vim.o`.
---  It is very similar to `vim.o` but offers an interface for conveniently interacting with tables.
---   See `:help lua-options`
---   and `:help lua-options-guide`
-vim.o.list = true
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+-- Minimal lines above/below cursor
+vim.opt.scrolloff = 10
 
--- Preview substitutions live, as you type!
-vim.o.inccommand = "split"
+-- =========================================================
+-- Editing Behavior
+-- =========================================================
 
--- Show which line your cursor is on
-vim.o.cursorline = true
+vim.opt.breakindent = true
+vim.opt.confirm = true
 
--- Minimal number of screen lines to keep above and below the cursor.
-vim.o.scrolloff = 10
+-- Case-insensitive search unless uppercase is used
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
--- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
--- instead raise a dialog asking if you wish to save the current file(s)
--- See `:help 'confirm'`
-vim.o.confirm = true
--- vim.g.neovide_opacity = 0.8
--- vim.g.neovide_window_blurred = true
+-- =========================================================
+-- Splits & Window Behavior
+-- =========================================================
+
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+
+-- =========================================================
+-- Performance & Responsiveness
+-- =========================================================
+
+vim.opt.updatetime = 250
+vim.opt.timeoutlen = 300
+
+-- =========================================================
+-- Files, Swap, Undo
+-- =========================================================
+
+-- Persistent undo
+vim.opt.undofile = true
+
+-- Centralized swap files
 vim.opt.directory = vim.fn.stdpath("data") .. "/swap//"
-vim.opt.signcolumn = "yes:2" -- or "auto:2"
-if vim.g.neovide then
-	vim.o.guifont = "Hurmit Nerd Font:h15"
-end
 
-vim.env.PATH = vim.env.PATH .. ":/home/gab/.yarn/bin"
+-- =========================================================
+-- Clipboard
+-- =========================================================
+
+-- Scheduled to avoid clipboard provider issues (WSL / SSH)
+vim.schedule(function()
+	vim.opt.clipboard = "unnamedplus"
+end)
+
+-- =====================
